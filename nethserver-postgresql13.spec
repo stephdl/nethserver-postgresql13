@@ -1,5 +1,5 @@
-Summary: NethServer PostgresSQL 12.0 configuration
-Name: nethserver-postgresql12
+Summary: NethServer PostgresSQL 13.0 configuration
+Name: nethserver-postgresql13
 Version: 0.0.1
 Release: 1%{?dist}
 License: GPL
@@ -7,13 +7,13 @@ URL: %{url_prefix}/%{name}
 Source0: %{name}-%{version}.tar.gz
 BuildArch: noarch
 
-Requires: rh-postgresql12
+Requires: rh-postgresql13
 Requires: nethserver-base
 
 BuildRequires: nethserver-devtools 
 
 %description
-NethServer PostgresSQL 12.0 configuration
+NethServer PostgresSQL 13.0 configuration
 
 %prep
 %setup
@@ -36,5 +36,5 @@ rm -rf %{buildroot}
 %dir %{_nseventsdir}/%{name}-update
 
 %changelog
-* Mon Apr 13 2020 stephane de Labrusse <stephdl@de-labrusse.fr>
+* Wed May 19 2021 stephane de Labrusse <stephdl@de-labrusse.fr>
 - initial

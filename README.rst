@@ -1,11 +1,11 @@
 =======================
-nethserver-postgresql12
+nethserver-postgresql13
 =======================
 
-PostgreSQL 12.0 comes from SCL: https://www.softwarecollections.org/en/scls/rhscl/rh-postgresql12/
+PostgreSQL 13.0 comes from SCL: https://www.softwarecollections.org/en/scls/rhscl/rh-postgresql13/
 
 To avoid conflicts with nethserver-postgresql,
-the default instance of PostgreSQL 12.0 uses port **55434**.
+the default instance of PostgreSQL 13.0 uses port **55435**.
 
 Access policy
 =============
@@ -22,12 +22,12 @@ Form any other network:
 Example for accessing with postgres user: ::
 
    su - postgres
-   psql --port=55434
+   psql --port=55435
 
 
-Access PostgreSQL 12.0: ::
+Access PostgreSQL 13.0: ::
 
-  su - postgres -c "scl enable rh-postgresql12 -- psql --port=55434"
+  su - postgres -c "scl enable rh-postgresql13 -- psql --port=55435"
 
 Backup
 ======
@@ -40,7 +40,7 @@ Example of backup action: ::
 
   #!/bin/bash
 
-  su - postgres -c "scl enable rh-postgresql12 -- pg_dump --port=55434 myapp > /var/lib/nethserver/myapp/myapp.sql"
+  su - postgres -c "scl enable rh-postgresql13 -- pg_dump --port=55435 myapp > /var/lib/nethserver/myapp/myapp.sql"
 
 
 Restore actions must be linked inside the ``post-restore-data`` event.
@@ -60,8 +60,8 @@ Example of restore action: ::
     echo "CREATE database myapp; CREATE USER sonicle WITH PASSWORD '$password'; GRANT ALL PRIVILEGES ON DATABASE myapp to myuser;" >> $drop_sql 
     # allow new connections to db
     echo "UPDATE pg_database SET datallowconn = 'true' WHERE datname = 'myapp';" >> $drop_sql
-    su - postgres -c "scl enable rh-postgresql12 -- psql --port=55434 < $drop_sql"
-    su - postgres -c "scl enable rh-postgresql12 -- psql --port=55434 myapp < /var/lib/nethserver/myapp/myapp.sql"
+    su - postgres -c "scl enable rh-postgresql13 -- psql --port=55435 < $drop_sql"
+    su - postgres -c "scl enable rh-postgresql13 -- psql --port=55435 myapp < /var/lib/nethserver/myapp/myapp.sql"
     rm -f $drop_sql
   fi
 
